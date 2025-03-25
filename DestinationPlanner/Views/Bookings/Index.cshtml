@@ -1,0 +1,11 @@
+﻿@model IEnumerable<DestinationPlanner.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h1 class="text-center"><i class="fas fa-calendar-check text-primary"></i> Booking Details</h1>
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DestinationPlanner.Models.Destination>
+
+@{
+    ViewData["Title"] = "Destinations";
+}
+
+<div class="container">
+    <div class="shadow-sm p-4 mb-4 bg-white rounded">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+            <h4 class="text-secondary"><i class="fas fa-map-marker-alt text-primary"></i> Destination Management</h4>
+            <a onclick="showInPopup('@Url.Action("AddOrEdit", "Destinations")', 'New Destination')"
+               class="btn btn-outline-primary">
+                <i class="fas fa-plus"></i> Add New
+            </a>
+        </div>
+
+        @using (Html.BeginForm("Index", "Destinations", FormMethod.Get, new { @class = "row g-2 align-items-center mb-3" }))
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="input-group shadow-sm">
+                    <input autocomplete="off" type="text" name="searchkey" class="form-control border-0"
+                           placeholder="Search by Destination, City, or Country..." value="@ViewData["searchkey"]">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-auto">
+                <a href="@Url.Action("Index", "Destinations")" class="btn btn-outline-secondary shadow-sm">
+                    <i class="fas fa-sync-alt"></i> Reset
+                </a>
+            </div>
+        }
+
+        <div class="table-responsive">
+            <table id="Table" class="table table-hover shadow-sm">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="fas fa-map-marker-alt"></i> Destination Name</th>
+                        <th><i class="fas fa-city"></i> City</th>
+                        <th><i class="fas fa-flag"></i> Country</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">@item.DestinationName</td>
+                            <td class="align-middle">@item.City.CityName</td>
+                            <td class="align-middle">@item.Country.CountryName</td>
+                            <td class="text-end">
+                                <a onclick="showInPopup('@Url.Action("Details", "Destinations", new { id = item.DestinationId })', 'Destination Details')"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <a onclick="showInPopup('@Url.Action("AddOrEdit", "Destinations", new { id = item.DestinationId })', 'Edit Destination')"
+                                   class="btn btn-sm btn-outline-info">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@item.DestinationId"
+                                      onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

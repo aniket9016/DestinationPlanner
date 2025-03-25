@@ -1,0 +1,16 @@
+﻿@model DestinationPlanner.Models.Destination
+
+<div class="container">
+    <h4>@Model.DestinationName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">City:</dt>
+        <dd class="col-sm-8">@Model.City.CityName</dd>
+
+        <dt class="col-sm-4">Country:</dt>
+        <dd class="col-sm-8">@Model.Country.CountryName</dd>
+    </dl>
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>

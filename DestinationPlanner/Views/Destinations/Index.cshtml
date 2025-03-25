@@ -1,0 +1,11 @@
+﻿@model IEnumerable<DestinationPlanner.Models.Destination>
+
+@{
+    ViewData["Title"] = "Destinations";
+}
+
+<h1 class="text-center"><i class="fas fa-map-marker-alt text-primary"></i> Destination Details</h1>
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>

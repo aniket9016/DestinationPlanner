@@ -1,0 +1,25 @@
+﻿@model DestinationPlanner.Models.Booking
+
+<div class="container">
+    <h4>Booking Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">Customer Name:</dt>
+        <dd class="col-sm-8">@Model.CustomerName</dd>
+
+        <dt class="col-sm-4">Travel Date:</dt>
+        <dd class="col-sm-8">@Model.TravelDate?.ToString("MM/dd/yyyy")</dd>
+
+        <dt class="col-sm-4">Package:</dt>
+        <dd class="col-sm-8">@Model.Package.PackageName</dd>
+
+        <dt class="col-sm-4">Duration:</dt>
+        <dd class="col-sm-8">@Model.Package.Duration</dd>
+
+        <dt class="col-sm-4">Price:</dt>
+        <dd class="col-sm-8">@Model.Package.Price</dd>
+    </dl>
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>

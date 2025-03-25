@@ -1,0 +1,53 @@
+﻿@model DestinationPlanner.Models.Booking
+
+@{
+    ViewData["Title"] = Model.BookingId == 0 ? "New Booking" : "Edit Booking";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.BookingId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookingId" />
+
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TravelDate" class="control-label"></label>
+                <input asp-for="TravelDate" class="form-control" type="date" />
+                <span asp-validation-for="TravelDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PackageId" class="control-label"></label>
+                <select id="PackageId" name="PackageId" class="form-control">
+                    <option value="">--- Select Package ---</option>
+                    @if (ViewBag.Packages != null)
+                    {
+                        @foreach (var package in (SelectList)ViewBag.Packages)
+                        {
+                            <option value="@package.Value" selected="@(Model.PackageId == Convert.ToInt32(package.Value) ? "selected" : null)">
+                                @package.Text
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="PackageId" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary w-100" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+}
